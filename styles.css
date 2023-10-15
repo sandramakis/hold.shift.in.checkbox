@@ -1,0 +1,35 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: #acd600;
+  background-image: linear-gradient(to right, pink, yellow);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main {
+  background-color: #ddd;
+  margin: 20px 0;
+  width: 50vw;
+  height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+div.item {
+  padding: 10px;
+}
+
+label,
+input {
+  cursor: pointer;
+}
+
+.checked {
+  text-decoration: line-through;
+}
