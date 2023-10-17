@@ -1,33 +1,46 @@
 "use strict";
-// starting conditions
-let isChecked = false;
+// starting variables
 
-// INPUTS
-const inputs = document.querySelectorAll(".item input");
-const inpArr = [];
-inpArr.push(...inputs);
+// CHECKBOX
+const checkboxes = document.querySelectorAll(".item input[type='checkbox']");
 
 // LABELS
 const label = document.querySelectorAll("label");
-const labArr = [];
-labArr.push(...label);
+const items = document.querySelectorAll(".item");
 
-inputs.forEach((inp) => {
-  inp.addEventListener("change", () => {
-    //  Get index of the current input to adjust the exact label
-    const getIndex = inpArr.indexOf(inp);
-    console.log(getIndex);
+// create last checked variable
+let lastChecked;
 
-    // Toggle .checked class once the input is changed
-    labArr[getIndex].classList.toggle("checked");
+// handleEvent fctn
+function handleEvent(e) {
+  let isBetween = false;
 
-    // When isChecked is true or false
-    if (inp.checked) {
-      isChecked = false;
-      console.log(`${inp.id} checked 🤜`);
-    } else {
-      console.log(`${inp.id} unchecked  👎`);
-      isChecked = true;
-    }
-  });
-});
+  const inpArr = [];
+  inpArr.push(...checkboxes);
+
+  // Get index of the current input to toggle .changed
+  // const getIndex = inpArr.indexOf(this);
+  // items[getIndex].classList.toggle("checked");
+
+  // If the checkbox is checked and shift key is on
+  if (this.checked && e.shiftKey) {
+    checkboxes.forEach((checkbox) => {
+      if (checkbox === this || checkbox === lastChecked) {
+        isBetween = !isBetween;
+        console.log("Starting to check them in between");
+      }
+
+      if (isBetween) {
+        checkbox.checked = true;
+        console.log(checkbox);
+      }
+    });
+  }
+
+  // update lastChecked to the current box checked
+  lastChecked = this;
+}
+
+checkboxes.forEach((checkbox) =>
+  checkbox.addEventListener("click", handleEvent)
+);
