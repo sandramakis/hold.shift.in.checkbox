@@ -1,12 +1,11 @@
 "use strict";
-// starting variables
+// ** STARTING VARTIABLES
 
 // CHECKBOX
 const checkboxes = document.querySelectorAll(".item input[type='checkbox']");
 
 // LABELS
 const label = document.querySelectorAll("label");
-const items = document.querySelectorAll(".item");
 
 // create last checked variable
 let lastChecked;
@@ -14,13 +13,6 @@ let lastChecked;
 // handleEvent fctn
 function handleEvent(e) {
   let isBetween = false;
-
-  const inpArr = [];
-  inpArr.push(...checkboxes);
-
-  // Get index of the current input to toggle .changed
-  // const getIndex = inpArr.indexOf(this);
-  // items[getIndex].classList.toggle("checked");
 
   // If the checkbox is checked and shift key is on
   if (this.checked && e.shiftKey) {
@@ -37,10 +29,22 @@ function handleEvent(e) {
     });
   }
 
-  // update lastChecked to the current box checked
+  // loop through each checkbox, if checking, toggle classlist(.checked)
+  if (this.checked) {
+    checkboxes.forEach((checkbox) => {
+      if (checkbox.checked) {
+        checkbox.parentElement.classList.add("checked");
+      }
+    });
+  } else {
+    this.parentElement.classList.remove("checked");
+  }
+
+  // make the last checked box = lastChecked
   lastChecked = this;
 }
 
+// click event for each checkbox
 checkboxes.forEach((checkbox) =>
   checkbox.addEventListener("click", handleEvent)
 );
